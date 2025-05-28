@@ -1,6 +1,6 @@
 # RKE2 High Availability Cluster on AWS with Terraform
 
-<img width="230" alt="image" src="https://github.com/user-attachments/assets/8ef9b70c-1d49-4bfe-afbc-de8171f218dc" />
+<img width="230" alt="image" src="https://camo.githubusercontent.com/e0e6e05e3edcfa94bd0eb63a3c45a35110625bd53bef7ce2d314dcbc13837e5d/68747470733a2f2f646f63732e726b65322e696f2f696d672f6c6f676f2d686f72697a6f6e74616c2d726b65322e737667" />
 
 This Terraform configuration deploys an RKE2 (Rancher Kubernetes Engine 2) high availability (HA) cluster on AWS.\
 It consists of:
@@ -9,7 +9,7 @@ It consists of:
 * 2 additional RKE2 server nodes
 * 3 RKE2 agent nodes
 
-<img width="450" alt="image" src="https://github.com/user-attachments/assets/6deeb5ff-f235-45c3-8aae-ae48020dbea5" />
+<img width="450" alt="image" src="https://docs.rke2.io/assets/images/rke2-production-setup-f5158274308e4a8976ea46273d6cb5c5.svg" />
 
 Image source: [RKE2 High Availability Installation Guide](https://docs.rke2.io/install/ha)
 
@@ -138,7 +138,7 @@ terraform destroy
 ### Notes
 
 - All nodes will be created in the same subnet and security group.
-- The first server node must be up and running before the other nodes are created, as they require the rke2_token and server1_ip.
+- The first server node must be up and running before the other nodes are created, as they require the `rke2_token` and server1_ip.
 
 ## References
 
