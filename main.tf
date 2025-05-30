@@ -21,6 +21,11 @@ resource "aws_instance" "rke2_server1" {
     is_server1     = true
     elastic_ip     = var.server1_public_ip
   })
+
+  root_block_device {
+    volume_size = 30
+    volume_type = "gp3"
+  }
 }
 
 resource "aws_eip_association" "server1_association" {
