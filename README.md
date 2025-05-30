@@ -88,7 +88,7 @@ This will provision the first RKE2 server with an Elastic IP.
 
 SSH into the first server node:
 ```
-ssh -i your-key.pem ec2-user@<server1_public_ip>
+ssh -i your-key.pem ec2-user@<SERVER1_PUBLIC_IP>
 ```
 Then, run:
 
