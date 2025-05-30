@@ -44,5 +44,10 @@ resource "aws_instance" "rke2_agents" {
     server1_ip = aws_instance.rke2_server1.private_ip
   })
 
+  root_block_device {
+    volume_size = 30
+    volume_type = "gp3"
+  }
+
   depends_on = [aws_instance.rke2_server1]
 }
