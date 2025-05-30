@@ -70,13 +70,6 @@ variable "server1_public_ip" {
   default = "xx.xx.xx.xx"
 }
 ```
-Also, edit `main.tf` and set the IAM profile name (with AdministratorAccess) for the AWS provider block:
-```
-provider "aws" {
-  profile = "your-admin-profile-name"
-  region  = var.region
-}
-```
 
 ### Step 2: Initialize Terraform
 
