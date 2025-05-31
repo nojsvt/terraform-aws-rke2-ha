@@ -5,7 +5,6 @@ mkdir -p /etc/rancher/rke2/
 SELF_IP=$(hostname -I | awk '{print $1}')
 
 cat <<EOF > /etc/rancher/rke2/config.yaml
-node-name: ${node_name}
 disable:
   - rke2-ingress-nginx
 EOF
