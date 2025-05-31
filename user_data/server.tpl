@@ -7,6 +7,7 @@ SELF_IP=$(hostname -I | awk '{print $1}')
 cat <<EOF > /etc/rancher/rke2/config.yaml
 disable:
   - rke2-ingress-nginx
+cloud-provider-name: aws
 EOF
 
 %{ if !is_server1 ~}
