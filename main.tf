@@ -15,7 +15,6 @@ resource "aws_instance" "rke2_server1" {
   }
 
   user_data = templatefile("${path.module}/user_data/server.tpl", {
-    node_name      = "server1"
     token          = ""
     server1_ip     = ""
     is_server1     = true
