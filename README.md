@@ -24,11 +24,13 @@ Image source: [RKE2 High Availability Installation Guide](https://docs.rke2.io/i
 
 ## File Overview
 
-* `main.tf`: Defines the primary RKE2 server instance and Elastic IP association
-* `servers.tf`: Defines 2 additional RKE2 servers and 3 agent nodes
-* `variables.tf`: Variables for region, AMI, instance type, keys, etc.
+* `iam_server.tf`: Creates the IAM policy and role for RKE2 servers
+* `iam_agent.tf`: Creates the IAM policy and role for RKE2 agents
+* `ec2_server1.tf`: Provisions the first RKE2 server EC2 instance with its initial configuration
+* `ec2_server_agent.tf`: Provisions additional RKE2 server and agent EC2 instances
 * `user_data/server.tpl`: Template for installing and configuring RKE2 server nodes
 * `user_data/agent.tpl`: Template for installing and configuring RKE2 agent nodes
+* `variables.tf`: Variables for region, AMI, instance type, keys, etc
 
 ## Usage
 
@@ -47,7 +49,7 @@ variable "key_name" {
 }
 
 variable "ami_id" {
-  default = "ami-0abcdef1234567890"
+  default = "ami-02c7683e4ca3ebf58"
 }
 
 variable "instance_type" {
@@ -77,14 +79,23 @@ variable "server1_public_ip" {
 terraform init
 ```
 
-### Step 3: Deploy First Server Node
+### Step 3: Create IAM Policies Roles
+
+Create IAM Policies & Roles necessary for the Amazon Cloud Provider.
+```
+terraform apply -target=aws_iam_policy.acl_server_policy -target=aws_iam_role.acl_server_role -target=aws_iam_policy.acl_agent_policy -target=aws_iam_role.acl_agent_role
+```
+Setting up the Amazon Cloud Provider Guide: \
+  [https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/amazon](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/amazon)
+  
+### Step 4: Deploy First Server Node
 
 ```
 terraform apply -target=aws_instance.rke2_server1 -target=aws_eip_association.server1_association
 ```
 This will provision the first RKE2 server with an Elastic IP.
 
-### Step 4: Retrieve the RKE2 Token
+### Step 5: Retrieve the RKE2 Token
 
 SSH into the first server node:
 ```
@@ -97,32 +108,22 @@ sudo cat /var/lib/rancher/rke2/server/node-token
 ```
 Copy the output and paste it into the `rke2_token` variable in variables.tf.
 
-### Step 5: Deploy Remaining Nodes
+### Step 6: Deploy Remaining Nodes
 
 ```
 terraform apply
 ```
 This will provision the remaining 2 RKE2 servers and 3 agents.
 
-### Step 6: Verify the Cluster
+### Step 7: Verify the Cluster
 
 SSH into any one of the server nodes and run the following command to verify that all nodes have joined the cluster:
 ```
 sudo /var/lib/rancher/rke2/bin/kubectl get nodes --kubeconfig /etc/rancher/rke2/rke2.yaml
 ```
-You should see all 6 nodes (3 servers and 3 agents) listed with the status Ready.\
-Example output:
-```pgsql
-NAME      STATUS   ROLES                       AGE     VERSION
-agent1    Ready    <none>                      120s    v1.32.5+rke2r1
-agent2    Ready    <none>                      120s    v1.32.5+rke2r1
-agent3    Ready    <none>                      120s    v1.32.5+rke2r1
-server1   Ready    control-plane,etcd,master   7m30s   v1.32.5+rke2r1
-server2   Ready    control-plane,etcd,master   100s    v1.32.5+rke2r1
-server3   Ready    control-plane,etcd,master   100s    v1.32.5+rke2r1
-```
+You should see all 6 nodes (3 servers and 3 agents) listed with the status Ready.
 
-### Step 7: Destroy All Resources
+### Step 8: Destroy All Resources
 
 When you're done, destroy the infrastructure with:
 ```
@@ -140,3 +141,6 @@ terraform destroy
 
 - RKE2 High Availability Installation Guide:  
   [https://docs.rke2.io/install/ha](https://docs.rke2.io/install/ha)
+
+- Setting up the Amazon Cloud Provider Guide: \
+  [https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/amazon](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/amazon)
