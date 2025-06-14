@@ -1,17 +1,17 @@
 variable "region" {
-  default = ""
+  default = "ap-southeast-1"
 }
 
 variable "key_name" {
-  default     = ""
+  default = ""
 }
 
 variable "ami_id" {
-  default = ""
+  default = "ami-02c7683e4ca3ebf58"
 }
 
 variable "instance_type" {
-  default = ""
+  default = "t3.medium"
 }
 
 variable "subnet_id" {
@@ -34,3 +34,10 @@ variable "server1_public_ip" {
   default = ""
 }
 
+variable "server_iam_instance_profile" {
+  default = "acl-server-role"
+}
+
+variable "agent_iam_instance_profile" {
+  default = "acl-agent-role"
+}
