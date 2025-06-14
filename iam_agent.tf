@@ -51,3 +51,9 @@ resource "aws_iam_role_policy_attachment" "acl_agent_policy_attachment" {
   role       = aws_iam_role.acl_agent_role.name
   policy_arn = aws_iam_policy.acl_agent_policy.arn
 }
+
+# IAM Instance Profile: acl-agent-role-instance-profile
+resource "aws_iam_instance_profile" "acl_agent_instance_profile" {
+  name = aws_iam_role.acl_agent_role.name
+  role = aws_iam_role.acl_agent_role.name
+}
