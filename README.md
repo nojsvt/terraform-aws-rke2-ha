@@ -24,8 +24,8 @@ Image source: [RKE2 High Availability Installation Guide](https://docs.rke2.io/i
 
 ## File Overview
 
-* `iam_server.tf`: Creates the IAM policy and role for RKE2 servers
-* `iam_agent.tf`: Creates the IAM policy and role for RKE2 agents
+* `iam_server.tf`: Creates the IAM policy and role and instance profile for RKE2 servers
+* `iam_agent.tf`: Creates the IAM policy and role and instance profile for RKE2 agents
 * `ec2_server1.tf`: Provisions the first RKE2 server EC2 instance with its initial configuration
 * `ec2_server_agent.tf`: Provisions additional RKE2 server and agent EC2 instances
 * `user_data/server.tpl`: Template for installing and configuring RKE2 server nodes
@@ -79,15 +79,17 @@ variable "server1_public_ip" {
 terraform init
 ```
 
-### Step 3: Create IAM Policies Roles
+### Step 3: Create IAM Policies & Roles & Instance Profiles 
 
-Create IAM Policies & Roles necessary for the Amazon Cloud Provider.
+Create IAM Policies & Roles & Instance Profiles necessary for the Amazon Cloud Provider.
 ```
 terraform apply \
   -target=aws_iam_policy.acl_server_policy \
   -target=aws_iam_role.acl_server_role \
   -target=aws_iam_policy.acl_agent_policy \
-  -target=aws_iam_role.acl_agent_role
+  -target=aws_iam_role.acl_agent_role \
+  -target=aws_iam_instance_profile.acl_server_instance_profile \
+  -target=aws_iam_instance_profile.acl_agent_instance_profile
 ```
 Setting up the Amazon Cloud Provider Guide: \
   [https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/amazon](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/amazon)
