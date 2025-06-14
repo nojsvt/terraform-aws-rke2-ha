@@ -9,6 +9,7 @@ resource "aws_instance" "rke2_server1" {
   subnet_id     = var.subnet_id
   key_name      = var.key_name
   vpc_security_group_ids = [var.security_group_id]
+  iam_instance_profile = var.server_iam_instance_profile
 
   tags = {
     Name = "server1"
