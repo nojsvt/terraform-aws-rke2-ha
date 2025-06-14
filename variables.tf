@@ -33,11 +33,3 @@ variable "server1_eip_allocation_id" {
 variable "server1_public_ip" {
   default = ""
 }
-
-variable "server_iam_instance_profile" {
-  default = "acl-server-role"
-}
-
-variable "agent_iam_instance_profile" {
-  default = "acl-agent-role"
-}
