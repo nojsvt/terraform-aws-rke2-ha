@@ -5,6 +5,7 @@ resource "aws_instance" "rke2_servers" {
   subnet_id     = var.subnet_id
   key_name      = var.key_name
   vpc_security_group_ids = [var.security_group_id]
+  iam_instance_profile = var.server_iam_instance_profile
 
   tags = {
     Name = "server${count.index + 2}"
@@ -33,6 +34,7 @@ resource "aws_instance" "rke2_agents" {
   subnet_id     = var.subnet_id
   key_name      = var.key_name
   vpc_security_group_ids = [var.security_group_id]
+  iam_instance_profile = var.agent_iam_instance_profile
 
   tags = {
     Name = "agent${count.index + 1}"
