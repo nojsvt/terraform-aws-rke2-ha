@@ -83,7 +83,11 @@ terraform init
 
 Create IAM Policies & Roles necessary for the Amazon Cloud Provider.
 ```
-terraform apply -target=aws_iam_policy.acl_server_policy -target=aws_iam_role.acl_server_role -target=aws_iam_policy.acl_agent_policy -target=aws_iam_role.acl_agent_role
+terraform apply \
+  -target=aws_iam_policy.acl_server_policy \
+  -target=aws_iam_role.acl_server_role \
+  -target=aws_iam_policy.acl_agent_policy \
+  -target=aws_iam_role.acl_agent_role
 ```
 Setting up the Amazon Cloud Provider Guide: \
   [https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/amazon](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/amazon)
@@ -91,7 +95,9 @@ Setting up the Amazon Cloud Provider Guide: \
 ### Step 4: Deploy First Server Node
 
 ```
-terraform apply -target=aws_instance.rke2_server1 -target=aws_eip_association.server1_association
+terraform apply \
+  -target=aws_instance.rke2_server1 \
+  -target=aws_eip_association.server1_association
 ```
 This will provision the first RKE2 server with an Elastic IP.
 
