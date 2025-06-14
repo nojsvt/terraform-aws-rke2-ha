@@ -8,7 +8,7 @@ resource "aws_instance" "rke2_servers" {
 
   tags = {
     Name = "server${count.index + 2}"
-    kubernetes.io/cluster/mycluster = "owned"
+    "kubernetes.io/cluster/mycluster" = "owned"
   }
 
   user_data = templatefile("${path.module}/user_data/server.tpl", {
@@ -36,7 +36,7 @@ resource "aws_instance" "rke2_agents" {
 
   tags = {
     Name = "agent${count.index + 1}"
-    kubernetes.io/cluster/mycluster = "owned"
+    "kubernetes.io/cluster/mycluster" = "owned"
   }
 
   user_data = templatefile("${path.module}/user_data/agent.tpl", {
