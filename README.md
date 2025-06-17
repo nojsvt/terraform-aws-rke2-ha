@@ -30,6 +30,7 @@ Image source: [RKE2 High Availability Installation Guide](https://docs.rke2.io/i
 * `ec2_server_agent.tf`: Provisions additional RKE2 server and agent EC2 instances
 * `user_data/server.tpl`: Template for installing and configuring RKE2 server nodes
 * `user_data/agent.tpl`: Template for installing and configuring RKE2 agent nodes
+* `subnet.tf`: Add a tag to your specified subnet: Key = `kubernetes.io/cluster/mycluster` Value = `owned`
 * `variables.tf`: Variables for region, AMI, instance type, keys, etc
 
 ## Usage
