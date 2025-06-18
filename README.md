@@ -85,12 +85,12 @@ terraform init
 Create IAM Policies & Roles & Instance Profiles necessary for the Amazon Cloud Provider.
 ```
 terraform apply \
-  -target=aws_iam_policy.acl_server_policy \
-  -target=aws_iam_role.acl_server_role \
-  -target=aws_iam_policy.acl_agent_policy \
-  -target=aws_iam_role.acl_agent_role \
-  -target=aws_iam_instance_profile.acl_server_instance_profile \
-  -target=aws_iam_instance_profile.acl_agent_instance_profile
+  -target=aws_iam_policy.acp_server_policy \
+  -target=aws_iam_role.acp_server_role \
+  -target=aws_iam_policy.acp_agent_policy \
+  -target=aws_iam_role.acp_agent_role \
+  -target=aws_iam_instance_profile.acp_server_instance_profile \
+  -target=aws_iam_instance_profile.acp_agent_instance_profile
 ```
 Setting up the Amazon Cloud Provider Guide: \
   [https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/amazon](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/amazon)
