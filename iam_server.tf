@@ -1,7 +1,7 @@
-# IAM Policy: acl-server-policy
-resource "aws_iam_policy" "acl_server_policy" {
-  name        = "acl-server-policy"
-  description = "IAM policy for acl-server-role"
+# IAM Policy: acp-server-policy
+resource "aws_iam_policy" "acp_server_policy" {
+  name        = "acp-server-policy"
+  description = "IAM policy for acp-server-role"
 
   policy = jsonencode({
     Version = "2012-10-17",
@@ -73,9 +73,9 @@ resource "aws_iam_policy" "acl_server_policy" {
   })
 }
 
-# IAM Role: acl-server-role
-resource "aws_iam_role" "acl_server_role" {
-  name               = "acl-server-role"
+# IAM Role: acp-server-role
+resource "aws_iam_role" "acp_server_role" {
+  name               = "acp-server-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
@@ -90,18 +90,18 @@ resource "aws_iam_role" "acl_server_role" {
   })
 
   tags = {
-    Name = "acl-server-role"
+    Name = "acp-server-role"
   }
 }
 
 # Attach the policy to the role
-resource "aws_iam_role_policy_attachment" "acl_server_policy_attachment" {
-  role       = aws_iam_role.acl_server_role.name
-  policy_arn = aws_iam_policy.acl_server_policy.arn
+resource "aws_iam_role_policy_attachment" "acp_server_policy_attachment" {
+  role       = aws_iam_role.acp_server_role.name
+  policy_arn = aws_iam_policy.acp_server_policy.arn
 }
 
-# IAM Instance Profile: acl-server-role-instance-profile
-resource "aws_iam_instance_profile" "acl_server_instance_profile" {
-  name = aws_iam_role.acl_server_role.name
-  role = aws_iam_role.acl_server_role.name
+# IAM Instance Profile: acp-server-role-instance-profile
+resource "aws_iam_instance_profile" "acp_server_instance_profile" {
+  name = aws_iam_role.acp_server_role.name
+  role = aws_iam_role.acp_server_role.name
 }
